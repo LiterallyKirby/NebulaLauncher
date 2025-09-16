@@ -1,54 +1,68 @@
-import "./App.css"; // <-- import the CSS file
+import "./App.css";
 import React, { useEffect, useState } from "react";
 import { GetProcesses, Inject } from "../wailsjs/go/main/App";
+import { EventsOn } from "../wailsjs/runtime/runtime";
 
 function App() {
-	const [processes, setProcesses] = useState([]);
-	const [log, setLog] = useState([]);
+  const [processes, setProcesses] = useState([]);
+  const [logs, setLogs] = useState([]); // store logs
 
-	useEffect(() => {
-		GetProcesses().then(setProcesses);
-	}, []);
+  useEffect(() => {
+    // Fetch processes initially and every 3 seconds
+    const fetchProcesses = () => {
+      GetProcesses().then(setProcesses);
+    };
 
-	const handleInject = async (pid) => {
-		try {
-			await Inject(pid);
-			setLog((prev) => [`Injected into PID ${pid}`, ...prev]);
-		} catch (err) {
-			setLog((prev) => [`Failed to inject PID ${pid}: ${err}`, ...prev]);
-		}
-	};
+    fetchProcesses();
+    const interval = setInterval(fetchProcesses, 3000);
 
-	return (
-		<div className="Screen">
-			<div className="Title">
-				Nebula Launcher
-				{[...Array(12)].map((_, i) => (
-					<div key={i} className={`star star${i + 1}`}></div>
-				))}
-			</div>
+    // Listen to backend log events
+    EventsOn("log", (msg) => {
+      setLogs((prev) => [...prev, msg]);
+    });
 
-			{/* Scrollable container for buttons */}
-			<div className="scroll-container">
-				<div className="grid-container">
-					{processes.map((p) => (
-						<button key={p.pid} onClick={() => handleInject(p.pid)}>
-							{p.pid} - {p.name}
-						</button>
-					))}
-				</div>
-			</div>
+    return () => clearInterval(interval);
+  }, []);
 
-			{/* Output / log section */}
-			<div className="log-container">
-				{log.map((entry, i) => (
-					<div key={i} className="log-entry">
-						{entry}
-					</div>
-				))}
-			</div>
-		</div>
-	);
+  const handleInject = (pid) => {
+    Inject(pid);
+  };
+
+  return (
+    <div className="Screen">
+      <div className="Title">
+        Nebula Launcher
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className={`star star${i + 1}`}></div>
+        ))}
+      </div>
+
+      <div className="scroll-container">
+   
+<div className="grid-container">
+  {processes
+    .filter(
+      (p) =>
+        p.name.toLowerCase().includes("java") ||
+        p.name.toLowerCase().includes("minecraft") ||
+        p.name.includes("1.8.9")
+    )
+    .map((p) => (
+      <button key={p.pid} onClick={() => handleInject(p.pid)}>
+        {p.pid} - {p.name}
+      </button>
+    ))}
+</div>
+</div>
+
+      {/* Log / Status Panel */}
+      <div className="log-container">
+        {logs.map((log, i) => (
+          <div key={i} className="log-entry">{log}</div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default App;
