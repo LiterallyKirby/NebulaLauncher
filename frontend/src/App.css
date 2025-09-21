@@ -47,10 +47,23 @@ body {
 }
 
 /* Star variations */
-.Title .star1  { background-color: #d8b0ff; width: 4px; height: 4px; animation-duration: 5s; transform-origin: -100px 0; }
-.Title .star2  { background-color: #a0ffff; width: 5px; height: 5px; animation-duration: 6s; transform-origin: -110px 0; }
-/* ... keep all existing star variations ... */
-.Title .star15 { background-color: #fff0a0; width: 3px; height: 3px; animation-duration: 7s; transform-origin: -125px 0; }
+
+.Title .star1  { background-color: #d8b0ff; width: 4px; height: 4px; animation-duration: 5s;  transform-origin: -100px 0; }
+.Title .star2  { background-color: #a0ffff; width: 5px; height: 5px; animation-duration: 6s;  transform-origin: -110px 0; }
+.Title .star3  { background-color: #ffd1a0; width: 6px; height: 6px; animation-duration: 7s;  transform-origin: -120px 0; }
+.Title .star4  { background-color: #b0ffa0; width: 3px; height: 3px; animation-duration: 8s;  transform-origin: -90px  0; }
+.Title .star5  { background-color: #fff;     width: 5px; height: 5px; animation-duration: 9s;  transform-origin: -140px 0; }
+.Title .star6  { background-color: #ffb6c1; width: 4px; height: 4px; animation-duration: 10s; transform-origin: -130px 0; }
+.Title .star7  { background-color: #a0c4ff; width: 3px; height: 3px; animation-duration: 11s; transform-origin: -115px 0; }
+.Title .star8  { background-color: #f1c0e8; width: 5px; height: 5px; animation-duration: 12s; transform-origin: -125px 0; }
+.Title .star9  { background-color: #fdffb6; width: 4px; height: 4px; animation-duration: 13s; transform-origin: -135px 0; }
+.Title .star10 { background-color: #caffbf; width: 6px; height: 6px; animation-duration: 14s; transform-origin: -145px 0; }
+.Title .star11 { background-color: #9bf6ff; width: 3px; height: 3px; animation-duration: 15s; transform-origin: -95px  0; }
+.Title .star12 { background-color: #ffadad; width: 5px; height: 5px; animation-duration: 16s; transform-origin: -105px 0; }
+.Title .star13 { background-color: #ffd6a5; width: 4px; height: 4px; animation-duration: 17s; transform-origin: -155px 0; }
+.Title .star14 { background-color: #caffbf; width: 3px; height: 3px; animation-duration: 18s; transform-origin: -160px 0; }
+.Title .star15 { background-color: #fff0a0; width: 6px; height: 6px; animation-duration: 19s; transform-origin: -125px 0; }
+
 
 /* Spin animation */
 @keyframes spin {

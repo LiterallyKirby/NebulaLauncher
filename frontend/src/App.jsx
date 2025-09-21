@@ -32,9 +32,10 @@ function App() {
     <div className="Screen">
       <div className="Title">
         Nebula Launcher
-        {[...Array(12)].map((_, i) => (
-          <div key={i} className={`star star${i + 1}`}></div>
-        ))}
+       
+{[...Array(15)].map((_, i) => (
+  <div key={i} className={`star star${i + 1}`}></div>
+))}
       </div>
 
       <div className="scroll-container">
